@@ -1,24 +1,19 @@
 <template>
-  <div>
-<div>
-        <input type="file" @change="uploadFile" ref="file">
-        <button @click="submitFile">Upload!</button>
-      </div>
-    
+  <div>    
 
-   {{images}}
   {{paintings.items[0].images.overall.images[0].sizes.xsmall.src}}
-  
+  <img :src=paintings.items[0].images.overall.images[0].sizes.xsmall.src>
   <!-- {{paintings.items[0]}} -->
   
   <ul v-for="painting in paintings.items" :key="painting.objectId">
       <li >
         
-        <!-- TEST: {{paintings.items[0].images.overall.images[0]}}, -->
+        
          
          
          Titel: {{painting.metadata.title}},
-         Datum: {{painting.metadata.date}}
+         Datum: {{painting.metadata.date}},
+         
          Medium: {{removeBrackets(painting.medium)}}
          Owner: {{painting.repository}}
        </li>
@@ -29,7 +24,7 @@
 
 <script>
  import json from '../../cda-paintings.json';
-import axios from 'axios';
+
 /* eslint-disable */
 export default{
     data(){
