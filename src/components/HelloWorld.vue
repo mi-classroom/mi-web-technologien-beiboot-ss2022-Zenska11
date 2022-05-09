@@ -1,29 +1,21 @@
 <template>
-  <div>    
-
-  {{paintings.items[0].images.overall.images[0].sizes.xsmall.src}}
-  <img :src=paintings.items[0].images.overall.images[0].sizes.xsmall.src>
-  <!-- {{paintings.items[0]}} -->
-  
-  <ul v-for="painting in paintings.items" :key="painting.objectId">
-      <li >
-        
-        
-         
-         
-         Titel: {{painting.metadata.title}},
-         Datum: {{painting.metadata.date}},
-         
-         Medium: {{removeBrackets(painting.medium)}}
-         Owner: {{painting.repository}}
-       </li>
-    </ul>
+  <div>  
+    <ul v-for="painting in paintings.items" :key="painting.objectId">
+        <li v-if="painting.isBestOf == true">
+          <p v-if="painting.images.overall != undefined"><img :src="painting.images.overall.images[0].sizes.xsmall.src"></p>
+          <p>Titel: {{painting.metadata.title}}</p>
+          <p>Datierung: {{painting.metadata.date}}</p>
+          <p>Art des Werks: {{removeBrackets(painting.medium)}}</p>
+          <p>Besitzer: {{painting.repository}}</p>
+          <br>
+        </li>
+      </ul>
 </div>
   
 </template>
 
 <script>
- import json from '../../cda-paintings.json';
+import json from '../../cda-paintings.json';
 
 /* eslint-disable */
 export default{
@@ -47,31 +39,14 @@ export default{
         }
         return 0;
         });
-    },
+      },
     methods: {
       removeBrackets(text) {
         let roundBracketsRemoved = text.split("(")[0];
-
 	      let squareBracketsRemoved = roundBracketsRemoved.split("[")[0];
-
         return squareBracketsRemoved;
-	      
-      },
-      uploadFile() {
-        this.Images = this.$refs.file.files[0];
-      },
-      submitFile() {
-        const formData = new FormData();
-        formData.append('file', this.Images);
-        const headers = { 'Content-Type': 'multipart/form-data' };
-        axios.post('https://httpbin.org/post', formData, { headers }).then((res) => {
-          res.data.files; // binary representation of the file
-          res.status; // HTTP status
-        });
       },
     }
 }
-// hilfreicher Link für Schleifen
-// https://stackoverflow.com/questions/37534249/nested-arrays-of-objects-and-v-for
 </script>
 

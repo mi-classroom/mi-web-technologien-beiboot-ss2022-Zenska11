@@ -14,4 +14,4 @@ Als Hosting Dienst wird [GitHub pages](https://pages.github.com/) verwendet.
 
 ## Consequences
 
-Jeder mit einem GitHub-Account kann Github Pages verwenden. Es können dort allerdings nur statische Seiten gehostet werden. Für die erste Iteration sollte dies jedoch reichen.
+Jeder mit einem GitHub-Account kann Github Pages verwenden. Es können dort allerdings nur statische Seiten gehostet werden. Für die erste Iteration sollte dies jedoch reichen. Dafür wird einfach der compilierte Code in ein zusätzliches Repository kopiert.
