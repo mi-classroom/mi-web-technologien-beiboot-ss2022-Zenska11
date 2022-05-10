@@ -4,6 +4,10 @@ Zum Modul Web Technologien gibt es ein begleitendes Projekt. Im Rahmen dieses Pr
 
 Als organisatorischen Rahmen für das Projekt nutzen wir GitHub Classroom. Inhaltlich befassen wir uns mit der Entwicklung einer kleinen Web-Anwendung für die Bearbeitung von Bildern. Hierbei steht weniger ein professioneller Konzeptions-, Entwurfs- und Entwicklungsprozess im Vordergrund, sondern vielmehr die sukzessive Weiterentwicklung einer Anwendung, das Ausprobieren, Vergleichen, Refactoren und die Freude an lauffähigem Code.
 
+## Inhaber
+Marc Kevin Zenzen
+Aktueller Link -> https://zenska11.github.io/
+
 ## Project setup
 ```
 npm install
