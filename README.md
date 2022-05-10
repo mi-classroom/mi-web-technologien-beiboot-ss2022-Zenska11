@@ -6,6 +6,7 @@ Als organisatorischen Rahmen für das Projekt nutzen wir GitHub Classroom. Inhal
 
 ## Inhaber
 Marc Kevin Zenzen
+
 Aktueller Link -> https://zenska11.github.io/
 
 ## Project setup
