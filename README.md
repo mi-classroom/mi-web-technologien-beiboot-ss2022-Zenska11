@@ -7,30 +7,34 @@ Als organisatorischen Rahmen für das Projekt nutzen wir GitHub Classroom. Inhal
 ## Inhaber
 Marc Kevin Zenzen
 
-Aktueller Link -> https://zenska11.github.io/
+Github Pages Link: -> https://zenska11.github.io/
+
+Docker Image läuft unter Azure: https://mzenzenbeiboot.azurewebsites.net/
 
 ## Project setup
 ```
 npm install
 ```
-## Add JSON
-Es muss noch die .json Datei in das Hauptverzeichnis gezogen werden, da diese nicht in dem Repository vorhanden ist. 
+### Docker
+Es muss Docker auf dem aktuellen PC installiert sein (In meinem Fall ist [Docker Desktop](https://www.docker.com/products/docker-desktop/) installiert)
+
+Um die Anwendung in einem Container auszuführen muss folgender Befehl ausgeführt werden:
+```
+docker run -it -p 8081:8080 -d --name docker-vuejs mzenzen.azurecr.io/beiboot-vuejs:latest
+```
+
+Mit dem nachfolgenden Befehl kann nachgeschaut werden, ob der zuvor erstellte Container läuft:
+```
+docker ps
+```
+Im Bwoser ist die Applikation unter **lokalhost:8081** erreichbar.
+
+## Projekt klonen und ausführen (ohne docker)
+### Add JSON
+Es muss noch die .json Datei in das Hauptverzeichnis gezogen werden, wenn an der Anwendung weiter entwickelt werden möchte. Die .JSON befindet sich nicht im Repository. 
 Diese muss folgenden Namen haben: cda-paintings.json
 
-### Compiles and hot-reloads for development
+### Anwendung ausführen
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
