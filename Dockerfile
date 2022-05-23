@@ -1,3 +1,4 @@
+# docker build -t zenska11/beiboot .
 # build stage
 FROM node:lts-alpine as build-stage
 WORKDIR /app
