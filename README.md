@@ -17,7 +17,7 @@ Es muss Docker auf dem aktuellen PC installiert sein (In meinem Fall ist [Docker
 
 Um die Anwendung in einem Container auszuführen muss folgender Befehl ausgeführt werden:
 ```
-docker run -it -p 8081:8080 -d --name docker-vuejs zenska11/beiboot:latest
+docker run -d -p 8080:80 --rm --name docker-vuejs zenska11/beiboot:latest
 ```
 
 Mit dem nachfolgenden Befehl kann nachgeschaut werden, ob der zuvor erstellte Container läuft:
