@@ -1,16 +1,3 @@
-<!-- <template>
-  <Renderer ref="rendererC" antialias :orbit-ctrl="{ enableDamping: true }" resize="window">
-    <Camera :position="{ z: 10 }" />
-    <Scene>
-      <PointLight :position="{ y: 50, z: 50 }" />
-      <Box :size="1" ref="meshC" :rotation="{ y: Math.PI / 4, z: Math.PI / 4 }">
-        <LambertMaterial />
-      </Box>
-    </Scene>
-  </Renderer>
-</template> -->
-
-
 <template>
   <div id="scene-container">
     
@@ -23,6 +10,8 @@ import * as THREE from 'three'
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 import {Text} from 'troika-three-text';
 import json from '../../cda-paintings.json';
+import image from '../assets/images/gras.jpg'
+import image2 from '../assets/images/stoff.jpg'
 
 export default {
   name: 'ThreeTest',
@@ -40,20 +29,23 @@ export default {
       floor: null,
       velocity: null,
       direction: null,
-      vertex: null,
       moveForward: false,
       moveBackward: false,
       moveLeft: false,
       moveRight: false,
-      raycaster: null,
-      objects: null,
+      image: image,
+      image2: image2,
       
     }
   },
-  
+  // ToDos:
+  // - Date aus dem Bildern entfernen
+  // - Größe der Bilder implementieren
   methods: {
     init: function() {
       this.scene = new THREE.Scene()
+      this.scene.background = new THREE.Color( 0x40a6ff );
+      this.scene.fog = new THREE.FogExp2( 0x40a6ff, 0.01 );
       this.camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
@@ -142,138 +134,119 @@ export default {
 
         document.addEventListener( 'keydown', onKeyDown );
 				document.addEventListener( 'keyup', onKeyUp );
-
-       // this.raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
-
       
 
       this.renderer = new THREE.WebGLRenderer()
-      this.renderer.setSize(window.innerWidth, window.innerHeight)
-      document.body.appendChild(this.renderer.domElement)
+      this.renderer.setSize(window.innerWidth -10, window.innerHeight - 20)
+      document.getElementById("scene-container").appendChild(this.renderer.domElement);
 
-
-
-      // // TEST cube
-      // const boxGeometry = new THREE.BoxGeometry(2, 2, 2)
-      // const material = new THREE.MeshBasicMaterial({ color: 0x00ffff })
-      // this.cube = new THREE.Mesh(boxGeometry, material)
-      // this.scene.add(this.cube)
 
       //needed variables
-      let n = 0
       let url ="";
       let newUrl = "";
+      let ranking = "";
+      let timeLine = 1500;
 
       let title = "";
+      let date = "";
       let involvedPerson = "";
       let medium = "";
       let repository = "";
 
       let zCoordinate = 0;
+      let xCoordinate = 0;
+
+      // for-Schleife, die alle Paintings erstellt 
       this.paintings.items.forEach(element => {
-        console.log(n);
-        n++;
-        //console.log(element.images.overall.images[0].sizes.medium.src);
+
+        // alte url durch neue url ersetzen
         url = element.images.overall.images[0].sizes.medium.src;
-        console.log(url)
         newUrl = url.replace( "imageserver-2022", "data-proxy/image.php?subpath=")
-        console.log(newUrl)
-
-      // frontside Plane
-      const frontPictureGeometry = new THREE.PlaneGeometry(5, 5)
-      const imageTexture = new THREE.TextureLoader().load( newUrl );
-      const imagematerial = new THREE.MeshBasicMaterial( { map: imageTexture } );
-      this.frontPicture = new THREE.Mesh(frontPictureGeometry, imagematerial)
+        
+        ranking = element.sortingInfo.year;
       
-      this.frontPicture.position.y = 1.8
-      this.frontPicture.position.z = zCoordinate
+        // Timeline Text
+        const myText1 = new Text()
+        this.scene.add(myText1)
+        // Set properties to configure:
+        myText1.text = timeLine
+        myText1.fontSize = 1
+        myText1.position.z = -0.1 + zCoordinate
+        myText1.position.y = 2
+        myText1.position.x = -10
+        myText1.color = 0xfa842b
+        
+        if (ranking === timeLine) {
+          
 
-      this.scene.add(this.frontPicture)
+          // frontside Plane
+          const frontPictureGeometry = new THREE.PlaneGeometry(5, 5)
+          const imageTexture = new THREE.TextureLoader().load( newUrl );
+          const imagematerial = new THREE.MeshBasicMaterial( { map: imageTexture } );
+          this.frontPicture = new THREE.Mesh(frontPictureGeometry, imagematerial)
+          
+          this.frontPicture.position.y = 3
+          this.frontPicture.position.z = zCoordinate
+  
+          this.scene.add(this.frontPicture)
+  
+          
+          // Backside Plane
+          const backsideGeometry = new THREE.PlaneGeometry(5, 5)
+          const imagebackTexture = new THREE.TextureLoader().load( this.image2 );
+          imagebackTexture.wrapS = THREE.RepeatWrapping;
+          imagebackTexture.wrapT = THREE.RepeatWrapping;
+          imagebackTexture.repeat.set(3, 3);
+          const TextMaterial = new THREE.MeshBasicMaterial( {map: imagebackTexture } );
+          this.backsiteText = new THREE.Mesh(backsideGeometry, TextMaterial)
+          
+          this.backsiteText.position.y = 3
+          this.backsiteText.rotation.y = 3.15
+          this.backsiteText.position.z = zCoordinate
+          this.backsiteText.position.x = xCoordinate
+          
+          this.scene.add(this.backsiteText)
+  
+          title = element.metadata.title;
+          date = element.sortingInfo.year;
+          involvedPerson = element.involvedPersons[0].name;
+          medium = this.removeBrackets(element.medium); 
+          repository = element.repository;
+          //Text
+          const myText = new Text()
+          this.scene.add(myText)
+          // Set properties to configure:
+          myText.text = 'Titel: ' +title + '\n' + 'Künstler: ' + involvedPerson + '\n' + 'Datierung: ' + date + '\n' + 'Art des Werks: ' + medium + '\n' + 'Besitzer: ' + repository
+          myText.fontSize = 0.1
+          myText.position.z = -0.1 + zCoordinate
+          myText.position.y = 2
+          myText.position.x = 1.8 + xCoordinate
+          myText.rotation.y = 3.15
+          myText.color = 0x000000
 
-      
-      // Backside Plane
-      const backsideGeometry = new THREE.PlaneGeometry(5, 5)
-      const TextMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff } );
-      this.backsiteText = new THREE.Mesh(backsideGeometry, TextMaterial)
-      
-      this.backsiteText.position.y = 1.9
-      this.backsiteText.rotation.y = 3.15
-      this.backsiteText.position.z = zCoordinate
-      
-      this.scene.add(this.backsiteText)
+          this.frontPicture.position.x = xCoordinate
+          xCoordinate = xCoordinate +10;
+          return
+        }
 
-      title = element.metadata.title;
-      
-      involvedPerson = element.involvedPersons[0].name;
-      medium = this.removeBrackets(element.medium); 
-      repository = element.repository;
-      //Text
-      const myText = new Text()
-      this.scene.add(myText)
-      // Set properties to configure:
-      myText.text = 'Titel: ' +title + '\n' + 'Künstler: ' + involvedPerson + '\n' + 'Art des Werks: ' + medium + '\n' + 'Besitzer: ' + repository
-      myText.fontSize = 0.1
-      myText.position.z = -0.1 + zCoordinate
-      myText.position.y = 2
-      myText.position.x = 1.8
-      myText.rotation.y = 3.15
-      myText.color = 0x9966FF
-
-
-
-
-      zCoordinate = zCoordinate -5;
-
+        xCoordinate = 0;
+        zCoordinate = zCoordinate -7;
+        timeLine = ranking;
       });
-
-
-
-
-      
-      // // Frontside Plane
-      // const frontPictureGeometry = new THREE.PlaneGeometry(5, 5)
-      // const imageTexture = new THREE.TextureLoader().load( 'https://lucascranach.org/data-proxy/image.php?subpath=/AT_KHM_GG6905_FR001/01_Overall/AT_KHM_GG6905_FR001_2008-08_Overall-m.jpg' );
-      // const imagematerial = new THREE.MeshBasicMaterial( { map: imageTexture } );
-      // this.frontPicture = new THREE.Mesh(frontPictureGeometry, imagematerial)
-      // this.scene.add(this.frontPicture)
-
-      // // Backside Plane
-      // const backsideGeometry = new THREE.PlaneGeometry(5, 5)
-      // const textTexture = new THREE.TextureLoader().load( 'https://lucascranach.org/data-proxy/image.php?subpath=/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_2008-11_Overall-s.jpg' );
-      // const TextMaterial = new THREE.MeshBasicMaterial( { map: textTexture } );
-      // this.backsiteText = new THREE.Mesh(backsideGeometry, TextMaterial)
-      // this.scene.add(this.backsiteText)
-      //Text
-      // const myText = new Text()
-      // this.scene.add(myText)
-      // // Set properties to configure:
-      // myText.text = ' Hallo'
-      // myText.fontSize = 0.1
-      // myText.position.z = -0.1
-      // myText.position.y = 1.8
-      // myText.rotation.y = 3
-      // myText.color = 0x9966FF
 
       // Floor
       const floorGeometry = new THREE.PlaneGeometry( 2000, 2000, 100, 100 );
-			const floorMaterial = new THREE.MeshBasicMaterial( { color: 0xf7f9ef } );
+      const imageTexture = new THREE.TextureLoader().load( this.image );
+      imageTexture.wrapS = THREE.RepeatWrapping;
+      imageTexture.wrapT = THREE.RepeatWrapping;
+      imageTexture.repeat.set(500, 500);
+      
+			const floorMaterial = new THREE.MeshBasicMaterial( { map: imageTexture } );
 			this.floor = new THREE.Mesh( floorGeometry, floorMaterial );
       this.scene.add(this.floor);
       
 
-      this.floor.rotation.x = -1.57
-      //this.floor.rotation.x = (- Math.PI / 2)
-      // this.cube.position.y = 1.8
-      // this.cube.position.z = - 2
-      //this.frontPicture.position.y = 1.9
-      //this.backsiteText.position.y = 1.9
-      //this.backsiteText.rotateY(3)
-
-      //this.backsiteText.position.z = 1.9
-  
-      
-
-
+      this.floor.rotation.x = -1.57  
 
     },
     animate: function() {
@@ -310,12 +283,11 @@ export default {
 
       this.renderer.render(this.scene, this.camera)
     },
-    /* eslint-disable */
     removeBrackets(text) {
-        let roundBracketsRemoved = text.split("(")[0];
-	      let squareBracketsRemoved = roundBracketsRemoved.split("[")[0];
-        return squareBracketsRemoved;
-      },
+      let roundBracketsRemoved = text.split("(")[0];
+      let squareBracketsRemoved = roundBracketsRemoved.split("[")[0];
+      return squareBracketsRemoved;
+    },
   },
   mounted() {
     // sortiert die Bilder nach dem Erscheinungsjahr
