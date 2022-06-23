@@ -1,3 +1,4 @@
+# https://v2.vuejs.org/v2/cookbook/dockerize-vuejs-app.html
 # docker build -t zenska11/beiboot .
 # build stage
 FROM node:lts-alpine as build-stage

@@ -1,16 +1,20 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <TheCanvas />
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+//import HelloWorld from './components/HelloWorld.vue'
+import TheCanvas from './components/TheCanvas.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // HelloWorld,
+    TheCanvas,
   }
 }
 </script>

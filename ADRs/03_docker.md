@@ -14,6 +14,7 @@ Es wird sich für die Bereitstellung eines Docker Images entschieden.
 
 ## Consequences
 
+JSON befindet sich nicht mehr im Container, da der Docker Container einen Nginx Server beinhaltet und damit nur der Dist Ordner verwendet wird. Durch Nginx ist zusätzlich Sicherheit geboten.
 ### Pros 
 * Ein Befehl, um die Anwendung lokal ausführen zu können.
 * Es muss nur das Images runter geladen werden.
