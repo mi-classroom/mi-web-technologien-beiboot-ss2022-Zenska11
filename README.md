@@ -24,7 +24,7 @@ Mit dem nachfolgenden Befehl kann nachgeschaut werden, ob der zuvor erstellte Co
 ```
 docker ps
 ```
-Im Bwoser ist die Applikation unter [localhost](lokalhost:8081) erreichbar.
+Im Bwoser ist die Applikation unter [localhost](lokalhost:8080) erreichbar.
 
 ## Projekt klonen und ausführen (ohne docker)
 ### Project setup
@@ -39,3 +39,19 @@ Diese muss folgenden Namen haben: cda-paintings.json
 ```
 npm run serve
 ```
+
+# Aufwände
+### 1 Issue
+30h
+
+### 2 Issue
+2h
+
+### 3 Issue
+32h 
+
+### 4 Issue
+10h
+
+### 5 Issue
+Alle nötigen Arrays am Anfang anlegen
