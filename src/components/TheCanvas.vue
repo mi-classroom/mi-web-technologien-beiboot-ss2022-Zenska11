@@ -6,6 +6,7 @@
 import * as THREE from "three";
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 import { Text } from "troika-three-text";
+// images reinladen
 import json from "../../cda-paintings.json";
 import image from "../assets/images/gras.jpg";
 import image2 from "../assets/images/stoff.jpg";
@@ -44,9 +45,11 @@ export default {
 
   methods: {
     init: function () {
+      // scene erstellen
       this.scene = new THREE.Scene();
       this.scene.background = new THREE.Color(0x40a6ff);
       this.scene.fog = new THREE.FogExp2(0x40a6ff, 0.005);
+      // camera erstellen
       this.camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
@@ -55,6 +58,7 @@ export default {
       );
       this.camera.position.z = 10;
       this.camera.position.y = 1.8;
+      // raycaster erstellen
       this.raycaster = new THREE.Raycaster();
       this.mouse = new THREE.Vector2();
 
@@ -502,6 +506,7 @@ export default {
         );
       }
     },
+    // erstellt die beiden Golffahnen
     golfflag() {
       // flag 1
       const geometry = new THREE.CylinderGeometry(0.02, 0.02, 10, 32);
