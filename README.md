@@ -40,6 +40,13 @@ Diese muss folgenden Namen haben: cda-paintings.json
 npm run serve
 ```
 
+### Steuerung
+* Mit W/S/A/D kann sich bewegt werden. 
+* Mit der Leertaste kann nach oben geflogen werden und mit Shift wieder runter.
+* Mit der Maus kann die Kamera bewegt werden.
+* Mit der Taste ALT kann das Bild eingefroren werden, um aus der Galerie raus zu navigieren. 
+* Wenn man von einem geöffneten Link zurück in die Anwendung möchte mus lediglich in das Fenster geklickt werden und man kann sich wieder normal bewegen.
+
 # Aufwände
 ### 1 Issue
 30h
@@ -51,7 +58,7 @@ npm run serve
 32h 
 
 ### 4 Issue
-10h
+12h
 
 ### 5 Issue
-Alle nötigen Arrays am Anfang anlegen
+4h
