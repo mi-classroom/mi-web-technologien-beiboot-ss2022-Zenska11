@@ -9,13 +9,13 @@ Marc Kevin Zenzen
 
 Github Pages Link: -> [beiboot-webseite](https://zenska11.github.io/)
 
-### Rieviewer
+### Reviewer
 Valeria Orlova
 
-### Docker
+## Docker
 Es muss Docker auf dem aktuellen PC installiert sein (In meinem Fall ist [Docker Desktop](https://www.docker.com/products/docker-desktop/) installiert)
 
-Um die Anwendung in einem Container auszuführen muss folgender Befehl ausgeführt werden:
+Um die Anwendung in einem Container auszuführen, muss folgender Befehl ausgeführt werden:
 ```
 docker run -d -p 8080:80 --rm --name docker-vuejs zenska11/beiboot:latest
 ```
@@ -24,15 +24,15 @@ Mit dem nachfolgenden Befehl kann nachgeschaut werden, ob der zuvor erstellte Co
 ```
 docker ps
 ```
-Im Bwoser ist die Applikation unter [localhost](lokalhost:8080) erreichbar.
+Im Browser ist die Applikation unter [localhost](lokalhost:8080) erreichbar.
 
 ## Projekt klonen und ausführen (ohne docker)
-### Project setup
+### Alle Pakete installieren
 ```
 npm install
 ```
 ### Add JSON
-Es muss noch die .json Datei in das Hauptverzeichnis gezogen werden, wenn an der Anwendung weiter entwickelt werden möchte. Die .JSON befindet sich nicht im Repository. 
+Es muss noch die .json Datei in das Hauptverzeichnis gezogen werden, wenn an der Anwendung weiter entwickelt oder diese ausgeführt werden soll. Die .JSON befindet sich nicht im Repository. 
 Diese muss folgenden Namen haben: cda-paintings.json
 
 ### Anwendung ausführen
@@ -40,25 +40,25 @@ Diese muss folgenden Namen haben: cda-paintings.json
 npm run serve
 ```
 
-### Steuerung
-* Mit W/S/A/D kann sich bewegt werden. 
-* Mit der Leertaste kann nach oben geflogen werden und mit Shift wieder runter.
-* Mit der Maus kann die Kamera bewegt werden.
-* Mit der Taste ALT kann das Bild eingefroren werden, um aus der Galerie raus zu navigieren. 
-* Wenn man von einem geöffneten Link zurück in die Anwendung möchte mus lediglich in das Fenster geklickt werden und man kann sich wieder normal bewegen.
+## Steuerung
+* Mit *W*/*S*/*A*/*D* kann sich bewegt werden. 
+* Mit der *Leertaste* kann nach oben geflogen werden und mit *Shift* wieder runter.
+* Mit der Maus kann die Kamera bewegt werden und per Mausklick können Bilder in einem neuen Tab geöffnet.
+* Mit der Taste *ALT* kann das Bild eingefroren werden, um aus der Galerie raus zu navigieren. 
+* Wenn man von einem geöffneten Link zurück in die Anwendung möchte, muss lediglich in das Fenster geklickt werden und man kann sich wieder normal bewegen.
 
 # Aufwände
-### 1 Issue
+### 1 Issue - Basisfunktionen
 30h
 
-### 2 Issue
+### 2 Issue - Review Process
 2h
 
-### 3 Issue
+### 3 Issue - 3D Zeitstrahl
 32h 
 
-### 4 Issue
+### 4 Issue - Relationen & Weitere Informationen
 12h
 
-### 5 Issue
+### 5 Issue - Add On: Explore more
 4h
