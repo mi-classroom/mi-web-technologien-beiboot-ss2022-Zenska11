@@ -6,16 +6,17 @@ Accepted
 
 ## Context
 
-Es sollen noch zusätzliche Features hinzugefügt werden, um die "Quality of life" zu erhöhen. Dazu zählen z.B. das der Charakter fliegen kann, das der Charakter sprinten kann, das der Charakter Motorrad fahren kann, eine Golffahne als Objekt oder bspw. das der Code aufgeräumt wird.
+Es sollen noch zusätzliche Features hinzugefügt werden, um die "Quality of life" zu erhöhen. Dazu zählen z.B. das Fliegen des Charakters, das Sprinten des Charakters, dass der Charakter Motorrad fahren kann, eine Golffahne als Objekt oder das Aufräumen des Codes.
 
 ## Decision
 
-Es wird sich dazu entschieden, dass der Charakter fliegen können soll und es wird eine Golffahne implementiert.
+Es wird sich dazu entschieden, dass der Charakter fliegen können soll und es wird eine Golffahne implementiert. Zum Schluss wird der Code aufgeräumt.
 
 ## Consequences
 ### Pros 
-* Durch das fliegen kann eine bessere Übersicht gewonnen werden, wie viele Gemälde insgesamt existieren.
-* Durch das fliegen kann können auch die Referenzbilder aus näherer Distanz angeschaut werden, da diese teilweise sehr hoch sind.
-* Golffahne erzeugt ein kleines schmunzeln im Gesicht der Nutzern.
+* Durch das Fliegen kann eine bessere Übersicht gewonnen werden, wie viele Gemälde insgesamt existieren.
+* Durch das Fliegen können die Referenzbilder aus näherer Distanz angeschaut werden, da diese teilweise sehr hoch sind. Zusätzlich können diese dadurch erst angeklickt werden.
+* Golffahne erzeugt ein kleines Schmunzeln im Gesicht der Nutzer.
+* Das Aufräumen des Codes macht den Code für andere besser lesbar.
 ### Cons
-* eventuell schwerere Steuerung für unerfahrene Nutzer.
+* Eventuell schwerere Steuerung für unerfahrene Nutzer.
