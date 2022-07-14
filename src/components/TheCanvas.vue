@@ -6,6 +6,7 @@
 import * as THREE from "three";
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 import { Text } from "troika-three-text";
+// images reinladen
 import json from "../../cda-paintings.json";
 import image from "../assets/images/gras.jpg";
 import image2 from "../assets/images/stoff.jpg";
@@ -28,21 +29,27 @@ export default {
       direction: null,
       moveForward: false,
       moveBackward: false,
+      moveUp_: false,
+      moveDown: false,
       moveLeft: false,
       moveRight: false,
+      minY: 1.8,
       image: image,
       image2: image2,
       projector: null,
       mouse: null,
       raycaster: null,
+      vector: null,
     };
   },
 
   methods: {
     init: function () {
+      // scene erstellen
       this.scene = new THREE.Scene();
       this.scene.background = new THREE.Color(0x40a6ff);
-      this.scene.fog = new THREE.FogExp2(0x40a6ff, 0.01);
+      this.scene.fog = new THREE.FogExp2(0x40a6ff, 0.005);
+      // camera erstellen
       this.camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
@@ -51,6 +58,7 @@ export default {
       );
       this.camera.position.z = 10;
       this.camera.position.y = 1.8;
+      // raycaster erstellen
       this.raycaster = new THREE.Raycaster();
       this.mouse = new THREE.Vector2();
 
@@ -58,6 +66,7 @@ export default {
       this.velocity = new THREE.Vector3();
       this.direction = new THREE.Vector3();
       this.clock = new THREE.Clock();
+      this.vector = new THREE.Vector3();
 
       this.controls = new PointerLockControls(this.camera, document.body);
 
@@ -97,6 +106,13 @@ export default {
           case "KeyD":
             this.moveRight = true;
             break;
+          case "Space":
+            this.moveUp_ = true;
+            break;
+          case "ShiftLeft":
+          case "ShiftRight":
+            this.moveDown = true;
+            break;
         }
       };
 
@@ -120,6 +136,13 @@ export default {
           case "ArrowRight":
           case "KeyD":
             this.moveRight = false;
+            break;
+          case "Space":
+            this.moveUp_ = false;
+            break;
+          case "ShiftLeft":
+          case "ShiftRight":
+            this.moveDown = false;
             break;
         }
       };
@@ -345,6 +368,9 @@ export default {
         });
       };
 
+      // Auffruf der Golffahne
+      this.golfflag();
+
       // for-Schleife, die alle Paintings erstellt
       this.paintings.items.forEach((element) => {
         // alte url durch neue url ersetzen
@@ -424,22 +450,39 @@ export default {
 
         this.velocity.x -= this.velocity.x * 10.0 * delta;
         this.velocity.z -= this.velocity.z * 10.0 * delta;
+        this.velocity.y -= this.velocity.y * 10.0 * delta;
 
         this.direction.z = Number(this.moveForward) - Number(this.moveBackward);
         this.direction.x = Number(this.moveRight) - Number(this.moveLeft);
+        this.direction.y = Number(this.moveUp_) - Number(this.moveDown);
         this.direction.normalize(); // this ensures consistent movements in all directions
 
         if (this.moveForward || this.moveBackward)
           this.velocity.z -= this.direction.z * 400.0 * delta;
         if (this.moveLeft || this.moveRight)
           this.velocity.x -= this.direction.x * 400.0 * delta;
+        if (this.moveUp_ || this.moveDown)
+          this.velocity.y -= this.direction.y * 400 * delta;
 
         this.controls.moveRight(-this.velocity.x * delta);
         this.controls.moveForward(-this.velocity.z * delta);
+        this.moveUp(-this.velocity.y * delta);
+
+        if (this.controls.getObject().position.y < this.minY) {
+          this.velocity.y = 0;
+          this.controls.getObject().position.y = this.minY;
+        }
+      } else {
+        this.velocity.set(0, 0, 0);
       }
 
       //this.selectPiece();
       this.renderer.render(this.scene, this.camera);
+    },
+    moveUp(distance) {
+      this.vector.setFromMatrixColumn(this.camera.matrix, 0);
+      this.vector.crossVectors(this.camera.up, this.vector);
+      this.camera.position.addScaledVector(this.camera.up, distance);
     },
     removeBrackets(text) {
       let roundBracketsRemoved = text.split("(")[0];
@@ -462,6 +505,38 @@ export default {
           "_blank"
         );
       }
+    },
+    // erstellt die beiden Golffahnen
+    golfflag() {
+      // flag 1
+      const geometry = new THREE.CylinderGeometry(0.02, 0.02, 10, 32);
+      const material = new THREE.MeshBasicMaterial({ color: 0xc7c7c7 });
+      const cylinder = new THREE.Mesh(geometry, material);
+      cylinder.position.x = -7;
+      this.scene.add(cylinder);
+
+      const geometry1 = new THREE.BoxGeometry(1.5, 1, 0.01);
+      const material1 = new THREE.MeshBasicMaterial({ color: 0x971a11 });
+      const cube = new THREE.Mesh(geometry1, material1);
+      cube.position.y = 4.5;
+      cube.position.x = -6.25;
+      this.scene.add(cube);
+
+      // flag 2
+      const geometry3 = new THREE.CylinderGeometry(0.02, 0.02, 10, 32);
+      const material3 = new THREE.MeshBasicMaterial({ color: 0xc7c7c7 });
+      const cylinder2 = new THREE.Mesh(geometry3, material3);
+      cylinder2.position.x = -7;
+      cylinder2.position.z = -280;
+      this.scene.add(cylinder2);
+
+      const geometry4 = new THREE.BoxGeometry(1.5, 1, 0.01);
+      const material4 = new THREE.MeshBasicMaterial({ color: 0x971a11 });
+      const cube2 = new THREE.Mesh(geometry4, material4);
+      cube2.position.y = 4.5;
+      cube2.position.x = -6.25;
+      cube2.position.z = -280;
+      this.scene.add(cube2);
     },
   },
   mounted() {
