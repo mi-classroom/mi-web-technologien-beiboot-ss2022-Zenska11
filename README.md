@@ -43,7 +43,7 @@ npm run serve
 ## Steuerung
 * Mit *W*/*S*/*A*/*D* kann sich bewegt werden. 
 * Mit der *Leertaste* kann nach oben geflogen werden und mit *Shift* wieder runter.
-* Mit der Maus kann die Kamera bewegt werden und per Mausklick können Bilder in einem neuen Tab geöffnet.
+* Mit der Maus kann die Kamera bewegt und per Mausklick können Bilder in einem neuen Tab geöffnet werden.
 * Mit der Taste *ALT* kann das Bild eingefroren werden, um aus der Galerie heraus zu navigieren. 
 * Wenn man von einem geöffneten Link zurück in die Anwendung möchte, muss lediglich in das Fenster geklickt werden und man kann sich wieder normal bewegen.
 
