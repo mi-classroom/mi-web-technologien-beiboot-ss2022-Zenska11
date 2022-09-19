@@ -18,6 +18,6 @@ Es wurde sich für ThreeJS entschieden. TriosJS (Vite + Threejs + Vuejs) wurde n
 * Viele Beispiele
 * Große Community
 * Schnell erlernbar
-* Pupulär 
+* Populär 
 ### Cons
 * TriosJS kann vielleicht schneller gecodet werden.
