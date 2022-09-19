@@ -14,4 +14,4 @@ Es wird Vuejs verwendet.
 
 ## Consequences
 
-Da ich schon Vorerfahrung mit VueJS habe, bietet es sich an dieses als Framework zu verwenden. Außerdem lässt es sich im späteren Verlauf mit three.js kombinieren, um den dreidimensionalen Raum mit in die Anwendung zu integrieren. Außerdem ist VueJS ein schlankeres Framework als z.B. Angular und React. 
+Da ich schon Vorerfahrung mit VueJS habe, bietet es sich an, dieses als Framework zu verwenden. Außerdem lässt es sich im späteren Verlauf mit three.js kombinieren, um den dreidimensionalen Raum mit in die Anwendung zu integrieren. Außerdem ist VueJS ein schlankeres Framework als z.B. Angular oder React. 

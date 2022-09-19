@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-Es sollen noch zusätzliche Features hinzugefügt werden, um die "Quality of life" zu erhöhen. Dazu zählen z.B. das Fliegen des Charakters, das Sprinten des Charakters, dass der Charakter Motorrad fahren kann, eine Golffahne als Objekt oder das Aufräumen des Codes.
+Es sollen noch zusätzliche Features hinzugefügt werden, um die "Quality of life" zu erhöhen. Dazu zählen z.B. das Fliegen des Charakters, das Sprinten des Charakters, eine Golffahne als Objekt implementiert wird oder das der Code aufräumen wird.
 
 ## Decision
 
