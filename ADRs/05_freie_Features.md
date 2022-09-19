@@ -19,4 +19,4 @@ Es wird sich dazu entschieden, dass der Charakter fliegen können soll und es wi
 * Golffahne erzeugt ein kleines Schmunzeln im Gesicht der Nutzer.
 * Das Aufräumen des Codes macht den Code für andere Entwickler*innen besser lesbar.
 ### Cons
-* Eventuell schwerere Steuerung für unerfahrene Nutzer.
+* Eventuell schwierigere Steuerung für unerfahrene Nutzer.
